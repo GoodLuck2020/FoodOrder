@@ -1,0 +1,454 @@
+{
+  "restaurants": [
+    {
+      "profile": {
+        "id": 1,
+        "picture": "../../assets/foodPicture.jpg",
+        "restaurantInfo": {
+          "restaurantName": "Test Name 1",
+          "restaurantAddress": "Test Address 1",
+          "hoursOfOperation": {
+            "mondayHours": {
+              "mondayOpen": "10:00 AM",
+              "mondayClosed": "7:30 PM"
+            },
+            "tuesdayHours": {
+              "tuesdayOpen": "10:01 AM",
+              "tuesdayClosed": "7:31 PM"
+            },
+            "wednesdayHours": {
+              "wednesdayOpen": "10:02 AM",
+              "wednesdayClosed": "7:32 PM"
+            },
+            "thursdayHours": {
+              "thursdayOpen": "10:00 AM",
+              "thursdayClosed": "7:30 PM"
+            },
+            "fridayHours": {
+              "fridayOpen": "10:00 AM",
+              "fridayClosed": "7:30 PM"
+            },
+            "saturdayHours": {
+              "saturdayOpen": "10:00 AM",
+              "satudayClosed": "7:30 PM"
+            },
+            "sundayHours": {
+              "sundayOpen": "10:05 AM",
+              "sundayClosed": "7:35 PM"
+            }
+          },
+          "restaurantType": {
+            "typeTags": [
+              "italian",
+              "fast food",
+              "pizza",
+              "burger"
+            ],
+            "food": true,
+            "drink": true
+          }
+        },
+        "deliveryOptions": {
+          "flatFee": 3.00,
+          "flatFeeRadius": 5.0,
+          "additionalDeliveryFee": 0.0,
+          "maxRadius": 10.0
+        },
+        "displayItem": {
+          "itemName": "Burrito",
+          "itemPicture": "test href 1",
+          "itemCategory": "Main"
+        }
+      },
+      "menu": {
+        "categories": [
+          {
+            "categoryName": "Mains",
+            "timeServed": [
+              "All Day"
+            ],
+            "items": [
+              {
+                "itemName": "Burrito",
+                "itemDescription": "Your choice of meat with pico de gallo, guacamole, and cheese served in a flour tortilla.",
+                "itemPrice": 9.59,
+                "picture": "",
+                "available": true,
+                "options": [
+                  {
+                    "optionTitle": "Choice of Protein",
+                    "optionList": [
+                      {
+                        "optionName": "Beef",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Chicken",
+                        "optionPrice": 1.0
+                      }
+                    ],
+                    "minimum": 1,
+                    "maximum": 1
+                  },
+                  {
+                    "optionTitle": "Add In",
+                    "optionList": [
+                      {
+                        "optionName": "Cilantro",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Onions",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Secret Sauce",
+                        "optionPrice": 0.0
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                ],
+                "typeTags": [],
+                "additionalHealthInfo": "",
+                "cityTax": 8,
+                "itemId": 1
+              },
+              {
+                "itemName": "Taco",
+                "itemDescription": "Your choice of meat with pico de gallo, guacamole, and cheese served on a corn tortilla.",
+                "itemPrice": 3.25,
+                "picture": "",
+                "available": true,
+                "options": [
+                  {
+                    "optionTitle": "Choice of Protein",
+                    "optionList": [
+                      {
+                        "optionName": "Beef",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Chicken",
+                        "optionPrice": 0.0
+                      }
+                    ],
+                    "minimum": 1,
+                    "maximum": 1
+                  },
+                  {
+                    "optionTitle": "Toppings",
+                    "optionList": [
+                      {
+                        "optionName": "Cilantro",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Onions",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Lettuce",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Avocado",
+                        "optionPrice": 0.69
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 4
+                  }
+                ],
+                "typeTags": [],
+                "additionalHealthInfo": "Cooked in peanut oil",
+                "cityTax": 8,
+                "itemId": 2
+              }
+            ]
+          },
+          {
+            "categoryName": "Breakfast",
+            "timeServed": [
+              "Open-11AM"
+            ],
+            "items": [
+              {
+                "itemName": "Breakfast Burrito",
+                "itemDescription": "Eggs and cheese and red salsa wrapped in a flour tortilla.",
+                "itemPrice": 8.50,
+                "picture": "",
+                "available": true,
+                "options": [
+                  {
+                    "optionTitle": "Choice of Protein",
+                    "optionList": [
+                      {
+                        "optionName": "Carne Asada",
+                        "optionPrice": 1.0
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "optionTitle": "Add In",
+                    "optionList": [
+                      {
+                        "optionName": "Hash brown",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Onions",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Secret Sauce",
+                        "optionPrice": 0.0
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                ],
+                "typeTags": [],
+                "additionalHealthInfo": "",
+                "cityTax": 8,
+                "itemId": 3
+              }
+            ]
+          }
+        ],
+        "defaultCityTax": 8
+      },
+      "distance": 4.2,
+      "rating": 3.8
+    },
+    {
+      "profile": {
+        "id": 2,
+        "picture": "../../assets/chorizo-mozarella-gnocchi-bake-cropped.jpg",
+        "restaurantInfo": {
+          "restaurantName": "Test Name 2",
+          "restaurantAddress": "Test Address 2",
+          "hoursOfOperation": {
+            "mondayHours": {
+              "mondayOpen": "10:00 AM",
+              "mondayClosed": "7:30 PM"
+            },
+            "tuesdayHours": {
+              "tuesdayOpen": "10:01 AM",
+              "tuesdayClosed": "7:31 PM"
+            },
+            "wednesdayHours": {
+              "wednesdayOpen": "10:02 AM",
+              "wednesdayClosed": "7:32 PM"
+            },
+            "thursdayHours": {
+              "thursdayOpen": "10:00 AM",
+              "thursdayClosed": "7:30 PM"
+            },
+            "fridayHours": {
+              "fridayOpen": "10:00 AM",
+              "fridayClosed": "7:30 PM"
+            },
+            "saturdayHours": {
+              "saturdayOpen": "10:00 AM",
+              "satudayClosed": "7:30 PM"
+            },
+            "sundayHours": {
+              "sundayOpen": "10:05 AM",
+              "sundayClosed": "7:35 PM"
+            }
+          },
+          "restaurantType": {
+            "typeTags": [
+              "italian",
+              "fast food",
+              "pizza",
+              "burger"
+            ],
+            "food": true,
+            "drink": true
+          }
+        },
+        "deliveryOptions": {
+          "flatFee": 3.00,
+          "flatFeeRadius": 5.0,
+          "additionalDeliveryFee": 0.0,
+          "maxRadius": 10.0
+        },
+        "displayItem": {
+          "itemName": "Burrito",
+          "itemPicture": "test href 1",
+          "itemCategory": "Main"
+        }
+      },
+      "menu": {
+        "categories": [
+          {
+            "categoryName": "Mains",
+            "timeServed": [
+              "All Day"
+            ],
+            "items": [
+              {
+                "itemName": "Burrito",
+                "itemDescription": "Your choice of meat with pico de gallo, guacamole, and cheese served in a flour tortilla.",
+                "itemPrice": 9.59,
+                "picture": "",
+                "available": true,
+                "options": [
+                  {
+                    "optionTitle": "Choice of Protein",
+                    "optionList": [
+                      {
+                        "optionName": "Beef",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Chicken",
+                        "optionPrice": 0.0
+                      }
+                    ],
+                    "minimum": 1,
+                    "maximum": 1
+                  },
+                  {
+                    "optionTitle": "Add In",
+                    "optionList": [
+                      {
+                        "optionName": "Cilantro",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Onions",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Secret Sauce",
+                        "optionPrice": 0.0
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                ],
+                "typeTags": [],
+                "additionalHealthInfo": "",
+                "cityTax": 8,
+                "itemId": 1
+              },
+              {
+                "itemName": "Taco",
+                "itemDescription": "Your choice of meat with pico de gallo, guacamole, and cheese served on a corn tortilla.",
+                "itemPrice": 3.25,
+                "picture": "",
+                "available": true,
+                "options": [
+                  {
+                    "optionTitle": "Choice of Protein",
+                    "optionList": [
+                      {
+                        "optionName": "Beef",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Chicken",
+                        "optionPrice": 0.0
+                      }
+                    ],
+                    "minimum": 1,
+                    "maximum": 1
+                  },
+                  {
+                    "optionTitle": "Toppings",
+                    "optionList": [
+                      {
+                        "optionName": "Cilantro",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Onions",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Lettuce",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Avocado",
+                        "optionPrice": 0.69
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 4
+                  }
+                ],
+                "typeTags": [],
+                "additionalHealthInfo": "Cooked in peanut oil",
+                "cityTax": 8,
+                "itemId": 2
+              }
+            ]
+          },
+          {
+            "categoryName": "Breakfast",
+            "timeServed": [
+              "Open-11AM"
+            ],
+            "items": [
+              {
+                "itemName": "Breakfast Burrito",
+                "itemDescription": "Eggs and cheese and red salsa wrapped in a flour tortilla.",
+                "itemPrice": 8.50,
+                "picture": "",
+                "available": true,
+                "options": [
+                  {
+                    "optionTitle": "Choice of Protein",
+                    "optionList": [
+                      {
+                        "optionName": "Carne Asada",
+                        "optionPrice": 1.0
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "optionTitle": "Add In",
+                    "optionList": [
+                      {
+                        "optionName": "Hash brown",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Onions",
+                        "optionPrice": 0.0
+                      },
+                      {
+                        "optionName": "Secret Sauce",
+                        "optionPrice": 0.0
+                      }
+                    ],
+                    "minimum": 0,
+                    "maximum": 3
+                  }
+                ],
+                "typeTags": [],
+                "additionalHealthInfo": "",
+                "cityTax": 8,
+                "itemId": 3
+              }
+            ]
+          }
+        ],
+        "defaultCityTax": 8
+      },
+      "distance": 1.3,
+      "rating": 4.2
+    }
+  ]
+}

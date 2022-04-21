@@ -1,0 +1,13 @@
+{
+  "mutableParametersState": {
+    "permissions": {
+      "auth": {
+        "foodorder40226ffb": [
+          "create",
+          "update"
+        ]
+      }
+    }
+  },
+  "lambdaLayers": []
+}

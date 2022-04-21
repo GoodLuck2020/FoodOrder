@@ -1,0 +1,96 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-foodorder-dev-85352-authRole",
+			"UnauthRoleArn": "arn:aws:iam::406963847248:role/amplify-foodorder-dev-85352-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::406963847248:role/amplify-foodorder-dev-85352-authRole",
+			"Region": "us-west-2",
+			"DeploymentBucketName": "amplify-foodorder-dev-85352-deployment",
+			"UnauthRoleName": "amplify-foodorder-dev-85352-unauthRole",
+			"StackName": "amplify-foodorder-dev-85352",
+			"StackId": "arn:aws:cloudformation:us-west-2:406963847248:stack/amplify-foodorder-dev-85352/623dbbc0-c6b3-11ea-9d1c-061773af76fc",
+			"AmplifyAppId": "d2vramm9x2zrru"
+		}
+	},
+	"auth": {
+		"foodorder40226ffb": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false,
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-foodorder-dev-85352-deployment/amplify-cfn-templates/auth/foodorder40226ffb-cloudformation-template.yml",
+				"logicalId": "authfoodorder40226ffb"
+			},
+			"lastPushTimeStamp": "2020-07-17T23:32:54.088Z",
+			"output": {
+				"AppClientSecret": "9nkd58m06o4l3jmflpr79o3vq9ft2od7iv8o3j8ibigld6fe05a",
+				"UserPoolId": "us-west-2_FrnURgWxl",
+				"AppClientIDWeb": "3eo6066r2qfh5jio28a5hl9h1h",
+				"AppClientID": "43cpf00nnh4dtfpj7u5p8n4q1n",
+				"IdentityPoolId": "us-west-2:4b71827e-3303-4524-9e7b-33c1622a0634",
+				"IdentityPoolName": "foodorder40226ffb_identitypool_40226ffb__dev",
+				"UserPoolName": "foodorder40226ffb_userpool_40226ffb"
+			},
+			"lastPushDirHash": "HiIalrZWCJCutK3nsOL0fixlNpQ="
+		}
+	},
+	"function": {
+		"updateRestaurantMenu": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "foodorder40226ffb",
+					"attributes": [
+						"UserPoolId"
+					]
+				}
+			],
+			"lastBuildTimeStamp": "2020-07-17T23:30:42.345Z",
+			"lastPackageTimeStamp": "2020-07-17T23:30:43.792Z",
+			"distZipFilename": "updateRestaurantMenu-316b2b576a786a744c55-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-foodorder-dev-85352-deployment/amplify-cfn-templates/function/updateRestaurantMenu-cloudformation-template.json",
+				"logicalId": "functionupdateRestaurantMenu"
+			},
+			"lastPushTimeStamp": "2020-07-17T23:32:54.092Z",
+			"output": {
+				"Region": "us-west-2",
+				"Arn": "arn:aws:lambda:us-west-2:406963847248:function:updateRestaurantMenu-dev",
+				"Name": "updateRestaurantMenu-dev",
+				"LambdaExecutionRole": "foodorderLambdaRolefe0ac38d-dev"
+			},
+			"lastPushDirHash": "ABOd1EP2E9U3r0BTo4p7WBfbfTg="
+		}
+	},
+	"api": {
+		"bbldelivery": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "updateRestaurantMenu",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-foodorder-dev-85352-deployment/amplify-cfn-templates/api/bbldelivery-cloudformation-template.json",
+				"logicalId": "apibbldelivery"
+			},
+			"lastPushTimeStamp": "2020-07-17T23:32:54.092Z",
+			"output": {
+				"ApiName": "bbldelivery",
+				"RootUrl": "https://jzi3io77oj.execute-api.us-west-2.amazonaws.com/dev",
+				"ApiId": "jzi3io77oj"
+			},
+			"lastPushDirHash": "iGcWieOJZADQCqg4688J10KmV4g="
+		}
+	}
+}

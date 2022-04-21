@@ -1,0 +1,65 @@
+{
+  "id": "",
+  "customerInfo": {
+    "username": "",
+    "picture": "",
+    "customerName": {
+      "firstName": "",
+      "lastName": ""
+    },
+    "customerAddress": {
+      "default": "",
+      "savedAddresses": [
+        {
+          "address": "",
+          "zip": "",
+          "state": ""
+        },
+        {
+          "address": "",
+          "zip": "",
+          "state": ""
+        }
+      ]
+    },
+    "contactInformation": {
+      "emailAddress": "",
+      "contactNumber": {
+        "phoneNumber": "",
+        "preferredContactMethod": [
+          "text",
+          "call"
+        ]
+      }
+    }
+  },
+  "paymentOptions": {
+    "default": {
+      "cardType": "",
+      "cardNumber": "",
+      "nameOnCard": "",
+      "cvv": "",
+      "expirationMonth": 0,
+      "expirationYear": 0
+    },
+    "cards": [
+      {
+        "cardType": "",
+        "cardNumber": "",
+        "nameOnCard": "",
+        "cvv": "",
+        "expirationMonth": "",
+        "expirationYear": ""
+      },
+      {
+        "cardType": "",
+        "cardNumber": "",
+        "nameOnCard": "",
+        "cvv": "",
+        "expirationMonth": "",
+        "expirationYear": ""
+      }
+    ]
+  },
+  "favorites": []
+}

@@ -1,0 +1,38 @@
+{
+  "orders": [
+    {
+      "orderId": "",
+      "status": "",
+      "orderTotal": "",
+      "items": [
+        {
+          "itemName": "",
+          "itemDescription": "",
+          "itemQuantity": 0,
+          "itemPrice": 0,
+          "options": [
+            {
+              "optionTitle": "",
+              "optionList": [
+                {
+                  "optionName": "",
+                  "optionPrice": 0.0
+                }
+              ]
+            }
+          ],
+          "specialInstructions": ""
+        }
+      ],
+      "dropoffName": "",
+      "dropoffAddress": "",
+      "dropoffPhoneNumber": 0,
+      "dropoffInstructions": "",
+      "dateOrderPlaced": "",
+      "timeOrderPlaced": "",
+      "timeOrderOutForDelivery": "",
+      "timeOrderDelivered": "",
+      "requiresId": false
+    }
+  ]
+}

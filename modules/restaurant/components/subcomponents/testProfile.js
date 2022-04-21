@@ -1,0 +1,5 @@
+export default function testProfile() {
+  return JSON.parse(
+    '{"id": 1,"restaurantInfo":{"restaurantName": "Test Name 1","restaurantPhoneNumber": "123-4567-8999","restaurantAddress": {"address": "Test Address 3", "city": "Test City 3", "zip": "Test Zip 3", "state": "test state 3"},"hoursOfOperation": {"mondayHours": {"mondayOpen": "10:00 AM","mondayClosed": "4:00 PM"},"tuesdayHours": {"tuesdayOpen": "10:30 AM","tuesdayClosed": "12:30 PM"},"wednesdayHours": {"wednesdayOpen": "10:00 AM","wednesdayClosed": "7:00 PM"},"thursdayHours": {"thursdayOpen": "11:30 AM","thursdayClosed": "12:00 PM"},"fridayHours": {"fridayOpen": "11:00 AM","fridayClosed": "6:00 PM"},"saturdayHours": {"saturdayOpen": "9:00 AM","saturdayClosed": "5:30 PM"},"sundayHours": {"sundayOpen": "3:00 PM","sundayClosed": "7:30 PM"}},"restaurantType": {"typeTags": ["italian","fast food","pizza","burger"],"food": true,"drink": true}},"deliveryOptions": {"flatFee": 3.00,"flatFeeRadius": 5.0,"additionalDeliveryFee": 0.0,"maxRadius": 10.0},"displayItem": {"itemName": "Taco","itemPicture": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg","itemCategory": "Main"}}',
+  );
+}

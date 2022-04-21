@@ -1,0 +1,313 @@
+{
+  "orders": [
+    {
+      "orderId": "abcd1234",
+      "status": "Awaiting Confirmation",
+      "orderTotal": "16.89",
+      "items": [
+        {
+          "itemName": "California Burrito",
+          "itemDescription": "Choice of protein, fries, guacamole, cheese, sour cream.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Choice of Protein",
+              "optionList": [
+                {
+                  "optionName": "Carne Asada"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "No sour cream"
+        },
+        {
+          "itemName": "Rolled Tacos Plate",
+          "itemDescription": "3pcs. Served with lettuce, tomatoes, cheese, sour cream, and guacamole.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Choice of Protein",
+              "optionList": [
+                {
+                  "optionName": "Chicken"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "No sour cream"
+        }
+      ],
+      "dropoffName": "John Bradley",
+      "dropoffAddress": "123 F St. San Diego, CA 92123",
+      "dropoffPhoneNumber": "8585551234",
+      "dropoffInstructions": "Leave at the door",
+      "dateOrderPlaced": "Friday, Jun 5th",
+      "timeOrderPlaced": "11:32am",
+      "timeOrderOutForDelivery": "",
+      "timeOrderDelivered": "",
+      "requiresId": false
+    },
+    {
+      "orderId": "efgh5678",
+      "status": "Being Prepared",
+      "orderTotal": "9.64",
+      "items": [
+        {
+          "itemName": "Carne Asada Fries",
+          "itemDescription": "Choice of protein. Comes with guacamole, pico de gallo, cheese, sour cream.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "",
+              "optionList": [
+                {
+                  "optionName": ""
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "No pico de gallo"
+        }
+      ],
+      "dropoffName": "Sarah Smith",
+      "dropoffAddress": "777 Broadway Ave San Diego, CA 92115",
+      "dropoffPhoneNumber": "6195551234",
+      "dropoffInstructions": "Leave at the door",
+      "dateOrderPlaced": "Friday, Jun 5th",
+      "timeOrderPlaced": "11:22am",
+      "timeOrderOutForDelivery": "",
+      "timeOrderDelivered": "",
+      "requiresId": false
+    },
+    {
+      "orderId": "ijkl2345",
+      "status": "Being Prepared",
+      "orderTotal": "13.27",
+      "items": [
+        {
+          "itemName": "Two Enchiladas Plate",
+          "itemDescription": "Choice of chicken/cheese/beef. Comes with rice and beans.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Enchilada type",
+              "optionList": [
+                {
+                  "optionName": "Chicken"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": ""
+        },
+        {
+          "itemName": "Coke",
+          "itemDescription": "",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Size Choice",
+              "optionList": [
+                {
+                  "optionName": "Medium"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "Light ice"
+        }
+      ],
+      "dropoffName": "Paul Atreides",
+      "dropoffAddress": "3800 Genesse Ave, San Diego, CA 92111",
+      "dropoffPhoneNumber": "6195559999",
+      "dropoffInstructions": "Leave at the door",
+      "dateOrderPlaced": "Friday, Jun 5th",
+      "timeOrderPlaced": "11:15am",
+      "timeOrderOutForDelivery": "",
+      "timeOrderDelivered": "",
+      "requiresId": false
+    },
+    {
+      "orderId": "lmno3456",
+      "status": "Out for Delivery",
+      "orderTotal": "29.61",
+      "items": [
+        {
+          "itemName": "California Burrito",
+          "itemDescription": "Choice of protein, fries, guacamole, cheese, sour cream.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Choice of Protein",
+              "optionList": [
+                {
+                  "optionName": "Carnitas"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": ""
+        },
+        {
+          "itemName": "California Burrito",
+          "itemDescription": "Choice of protein, fries, guacamole, cheese, sour cream.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Choice of Protein",
+              "optionList": [
+                {
+                  "optionName": "Carne Asada"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "No sour cream"
+        },
+        {
+          "itemName": "Shrimp Burrito",
+          "itemDescription": "Grilled Shrimp, fries, guacamole, cheese, chipotle sauce.",
+          "itemQuantity": 1,
+          "options": [],
+          "specialInstructions": ""
+        },
+        {
+          "itemName": "Coke",
+          "itemDescription": "",
+          "itemQuantity": 3,
+          "options": [
+            {
+              "optionTitle": "Size Choice",
+              "optionList": [
+                {
+                  "optionName": "Medium"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "Extra ice"
+        }
+      ],
+      "dropoffName": "Samantha Kim",
+      "dropoffAddress": "5253 Pendleton St. San Diego, CA 92109",
+      "dropoffPhoneNumber": "6195551516",
+      "dropoffInstructions": "Leave at the door",
+      "dateOrderPlaced": "Friday, Jun 5th",
+      "timeOrderPlaced": "11:02am",
+      "timeOrderOutForDelivery": "11:25am",
+      "timeOrderDelivered": "",
+      "requiresId": false
+    },
+    {
+      "orderId": "tuvx6789",
+      "status": "Completed",
+      "orderTotal": "22.95",
+      "items": [
+        {
+          "itemName": "Shrimp Burrito",
+          "itemDescription": "Grilled Shrimp, fries, guacamole, cheese, chipotle sauce.",
+          "itemQuantity": 1,
+          "options": [],
+          "specialInstructions": ""
+        },
+        {
+          "itemName": "California Burrito",
+          "itemDescription": "Choice of protein, fries, guacamole, cheese, sour cream.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Choice of Protein",
+              "optionList": [
+                {
+                  "optionName": "Carne Asada"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "No fries"
+        },
+        {
+          "itemName": "Coke",
+          "itemDescription": "",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Size Choice",
+              "optionList": [
+                {
+                  "optionName": "Medium"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "Light ice"
+        }
+      ],
+      "dropoffName": "Brad Kingston",
+      "dropoffAddress": "717 Via Sol Ct, San Diego, CA 92121",
+      "dropoffPhoneNumber": "8585551445",
+      "dropoffInstructions": "Leave at the door",
+      "dateOrderPlaced": "Thursday, Jun 4th",
+      "timeOrderPlaced": "10:02am",
+      "timeOrderOutForDelivery": "10:28am",
+      "timeOrderDelivered": "10:39am",
+      "requiresId": false
+    },
+    {
+      "orderId": "bdef2156",
+      "status": "Completed",
+      "orderTotal": "15.92",
+      "items": [
+        {
+          "itemName": "Rolled Tacos Plate",
+          "itemDescription": "3pcs. Served with lettuce, tomatoes, cheese, sour cream, and guacamole.",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Choice of Protein",
+              "optionList": [
+                {
+                  "optionName": "Chicken"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": "No sour cream"
+        },
+        {
+          "itemName": "Shrimp Burrito",
+          "itemDescription": "Grilled Shrimp, fries, guacamole, cheese, chipotle sauce.",
+          "itemQuantity": 1,
+          "options": [],
+          "specialInstructions": "No guac"
+        },
+        {
+          "itemName": "Sprite",
+          "itemDescription": "",
+          "itemQuantity": 1,
+          "options": [
+            {
+              "optionTitle": "Size Choice",
+              "optionList": [
+                {
+                  "optionName": "Large"
+                }
+              ]
+            }
+          ],
+          "specialInstructions": ""
+        }
+      ],
+      "dropoffName": "Drew Harris",
+      "dropoffAddress": "961 Niantic Ave, San Diego, CA 92007",
+      "dropoffPhoneNumber": "6195551222",
+      "dropoffInstructions": "Leave at the door",
+      "dateOrderPlaced": "Thursday, Jun 4th",
+      "timeOrderPlaced": "7:10pm",
+      "timeOrderOutForDelivery": "7:25pm",
+      "timeOrderDelivered": "7:37pm",
+      "requiresId": false
+    }
+  ]
+}

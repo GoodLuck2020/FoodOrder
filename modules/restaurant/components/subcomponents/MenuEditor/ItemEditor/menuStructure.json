@@ -1,0 +1,27 @@
+{
+  "categories": [{
+    "categoryName": "",
+    "timeServed": [""],
+    "items": [{
+      "itemName": "",
+      "itemDescription": "",
+      "itemPrice": 0.0,
+      "picture": "",
+      "ingredients": "",
+      "available": true,
+      "options": [{
+        "optionTitle": "",
+        "optionList": [{
+          "optionName": "",
+          "optionPrice": 0.0
+        }],
+        "minimum": 0,
+        "maximum": 1
+      }],
+      "typeTags": [""],
+      "additionalHealthInfo": "",
+      "cityTax": 0.0
+    }]
+  }],
+  "defaultCityTax": 0.0
+}

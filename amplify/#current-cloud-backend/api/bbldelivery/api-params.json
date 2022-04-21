@@ -1,0 +1,39 @@
+{
+    "paths": [
+        {
+            "name": "/restaurant/update/menu",
+            "lambdaFunction": "updateRestaurantMenu",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            }
+        }
+    ],
+    "resourceName": "bbldelivery",
+    "apiName": "bbldelivery",
+    "functionArns": [
+        {
+            "lambdaFunction": "updateRestaurantMenu"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-foodorder-dev-85352-authRole",
+        "unAuthRoleName": "amplify-foodorder-dev-85352-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "updateRestaurantMenu",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

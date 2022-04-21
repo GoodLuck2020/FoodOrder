@@ -1,0 +1,58 @@
+{
+  "id": 1,
+  "restaurantInfo": {
+    "restaurantName": "",
+    "restaurantAddress": "",
+    "hoursOfOperation": {
+      "mondayHours": {
+        "mondayOpen": "",
+        "mondayClosed": ""
+      },
+      "tuesdayHours": {
+        "tuesdayOpen": "",
+        "tuesdayClosed": ""
+      },
+      "wednesdayHours": {
+        "wednesdayOpen": "",
+        "wednesdayClosed": ""
+      },
+      "thursdayHours": {
+        "thursdayOpen": "",
+        "thursdayClosed": ""
+      },
+      "fridayHours": {
+        "fridayOpen": "",
+        "fridayClosed": ""
+      },
+      "saturdayHours": {
+        "saturdayOpen": "",
+        "satudayClosed": ""
+      },
+      "sundayHours": {
+        "sundayOpen": "",
+        "sundayClosed": ""
+      }
+    },
+    "restaurantType": {
+      "typeTags": [
+        "italian",
+        "fastFood",
+        "pizza",
+        "burger"
+      ],
+      "food": true,
+      "drink": true
+    }
+  },
+  "deliveryOptions": {
+    "flatFee": 0.00,
+    "flatFeeRadius": 5.0,
+    "additionalDeliveryFee": 0.0,
+    "maxRadius": 10.0
+  },
+  "displayItem": {
+    "itemName": "",
+    "itemPicture": "",
+    "itemCategory": ""
+  }
+}

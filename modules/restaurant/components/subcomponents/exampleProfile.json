@@ -1,0 +1,58 @@
+{
+  "id": 1,
+  "restaurantInfo": {
+    "restaurantName": "Test Name 1",
+    "restaurantAddress": "Test Address 1",
+    "hoursOfOperation": {
+      "mondayHours": {
+        "mondayOpen": "10:00 AM",
+        "mondayClosed": "7:30 PM"
+      },
+      "tuesdayHours": {
+        "tuesdayOpen": "10:01 AM",
+        "tuesdayClosed": "7:31 PM"
+      },
+      "wednesdayHours": {
+        "wednesdayOpen": "10:02 AM",
+        "wednesdayClosed": "7:32 PM"
+      },
+      "thursdayHours": {
+        "thursdayOpen": "10:03 AM",
+        "thursdayClosed": "7:33 PM"
+      },
+      "fridayHours": {
+        "fridayOpen": "10:05 AM",
+        "fridayClosed": "7:35 PM"
+      },
+      "saturdayHours": {
+        "saturdayOpen": "10:08 AM",
+        "saturdayClosed": "7:38 PM"
+      },
+      "sundayHours": {
+        "sundayOpen": "CLOSED",
+        "sundayClosed": "CLOSED"
+      }
+    },
+    "restaurantType": {
+      "typeTags": [
+        "italian",
+        "fast food",
+        "pizza",
+        "burger"
+      ],
+      "food": true,
+      "drink": true
+    }
+  },
+  "deliveryOptions": {
+    "flatFee": 3.00,
+    "flatFeeRadius": 5.0,
+    "additionalDeliveryFee": 0.0,
+    "maxRadius": 10.0
+  },
+  "displayItem": {
+    "itemName": "Burrito",
+    "itemPicture": "test href 1",
+    "itemCategory": "Main"
+  }
+}
