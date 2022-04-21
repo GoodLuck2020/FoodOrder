@@ -47,10 +47,10 @@ export default class OrderDetails extends React.Component {
       <View style={styles.general}>
         <View style={styles.orderDetailsHeader}>
           <Text h4 style={styles.dropoffName}>
-            {this.order.dropoffName}
+            {this.order.restaurant_name}
           </Text>
           <Text h4 style={styles.orderDetailsPrice}>
-            {'$' + this.order.orderTotal}
+            {'$' + this.order.order_total}
           </Text>
         </View>
         {this.props.route.params.order.status !== 'Completed' && (
@@ -72,13 +72,13 @@ export default class OrderDetails extends React.Component {
         )}
 
         <Text h5 style={styles.orderItemCount}>
-          {this.order.items.length + ' items'}
+          {this.order.menu_items.length + ' items'}
         </Text>
-        {this.order.items.map((item, i) => {
+        {this.order.menu_items.map((item, i) => {
           return (
             <View
               style={styles.orderDetailsItem}
-              key={this.order.orderId + '_' + item.itemName + '_' + i}>
+              key={this.order.order_id + '_' + item.itemName + '_' + i}>
               <Text style={styles.orderDetailsItemName}>{item.itemName}</Text>
               {this.checkForItemDescription(item)}
               {this.checkForSpecialInstructions(item)}

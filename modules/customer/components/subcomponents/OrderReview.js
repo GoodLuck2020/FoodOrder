@@ -183,20 +183,26 @@ export default function OrderReview({navigation, route}) {
           );
 
           let data = await response.json();
+          console.log('order detail =====>', info, restaurantInfo, customerOrder, profile);
+
           if (data.statusCode === 200) {
             let orderDetail = {
-              incoming_Id: info.username,
+              incomingId: info.username,
               order: {
+                customerName:
+                    profile.customerInfo.customerName.firstName +
+                    ' ' +
+                    profile.customerInfo.customerName.lastName,
                 restaurantId: restaurantInfo.RestaurantId,
-                name: customerOrder.restaurantName,
-                items: customerOrder.items,
-                created: new Date(),
+                restaurantName: customerOrder.restaurantName,
+                menuId: '',
+                menuItems: customerOrder.items,
+                promoBought: [''],
+                referralCode: '',
                 orderTotal,
-                customer:
-                  profile.customerInfo.customerName.firstName +
-                  ' ' +
-                  profile.customerInfo.customerName.lastName,
+                timeOrderPlaced: new Date(),
                 status: 'Awaiting Confirmation',
+                timeOrderCompleted: ''
               },
             };
 
@@ -217,6 +223,8 @@ export default function OrderReview({navigation, route}) {
                 body: JSON.stringify(orderDetail),
               },
             );
+
+            console.log('payment =====>', await response.json());
 
             navigation.navigate('MenuDisplay', {paymentSuccess: true});
 

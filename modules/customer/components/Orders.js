@@ -6,6 +6,7 @@ import Loading from 'react-native-loading-spinner-overlay';
 import {ScrollView} from 'react-native-gesture-handler';
 import OrderDetails from './subcomponents/OrderDetails/OrderDetails';
 import {Auth} from 'aws-amplify';
+import moment from "moment";
 
 //JSON Object
 
@@ -110,21 +111,21 @@ function OrdersList({navigation, route}) {
                       order: order,
                     });
                   }}>
-                  <View key={'order_display_' + order.dropoffName}>
+                  <View key={'order_display_' + order.restaurant_name}>
                     <Text h5 style={styles.orderDate}>
-                      {order.dateOrderPlaced}
+                      {moment(order.time_order_placed).format('YYYY-MM-DD h:mm:ss A')}
                     </Text>
                     <Text h4 style={styles.dropoffName}>
-                      {order.dropOfName}
+                      {order.restaurant_name}
                     </Text>
                     <Text h4 style={styles.dropoffName}>
                       {order.status}
                     </Text>
                     <Text h5 style={styles.orderItemCount}>
-                      {order.items.length + ' items'}
+                      {order.menu_items.length + ' items'}
                     </Text>
                     <Text h2 style={styles.orderPrice}>
-                      {'$' + order.orderTotal}
+                      {'$' + order.order_total}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -149,16 +150,16 @@ function OrdersList({navigation, route}) {
                   }}>
                   <View key={'completed_order_display_' + order.dropoffName}>
                     <Text h4 style={styles.dropoffName}>
-                      {order.dropoffName}
+                      {order.restaurant_name}
                     </Text>
                     <Text h5 style={styles.orderDate}>
-                      {order.dateOrderPlaced}
+                        {moment(order.time_order_placed).format('YYYY-MM-DD h:mm:ss A')}
                     </Text>
                     <Text h5 style={styles.orderItemCount}>
-                      {order.items.length + ' items'}
+                      {order.menu_items.length + ' items'}
                     </Text>
                     <Text h2 style={styles.orderPrice}>
-                      {'$' + order.orderTotal}
+                      {'$' + order.order_total}
                     </Text>
                   </View>
                 </TouchableOpacity>
