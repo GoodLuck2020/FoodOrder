@@ -10678,7 +10678,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@15.7.2":
+"prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15.5.0", "prop-types@15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -10876,6 +10876,13 @@
   "resolved" "https://registry.npmjs.org/react-native-dynamic-search-bar/-/react-native-dynamic-search-bar-2.0.2.tgz"
   "version" "2.0.2"
 
+"react-native-easy-toast@^2.0.0":
+  "integrity" "sha512-mLvHOy/slCJfgrLfOercIhVKslTF6D7NrJ7XLTRK3BCim7kNO1JdAgQ5+IF6bqdcUcFMIW/GwiauUbnSpynr8Q=="
+  "resolved" "https://registry.npmjs.org/react-native-easy-toast/-/react-native-easy-toast-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "prop-types" "^15.5.10"
+
 "react-native-elements@^0.19.1":
   "integrity" "sha1-+Stp2GShUCFdAfgf48UqnK2oPkU="
   "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-0.19.1.tgz"
@@ -10899,6 +10906,11 @@
     "prop-types" "^15.7.2"
     "react-native-ratings" "^6.5.0"
     "react-native-status-bar-height" "^2.2.0"
+
+"react-native-fast-image@^8.3.4":
+  "integrity" "sha512-cNW4bIJg3nvKaheG8vGMfqCt5LMWX9MS5+wMudgKIHbGO51spRr4sgnlhVgwHLcZ5aeNOVJ8CPRxDIWKRq/0QA=="
+  "resolved" "https://registry.npmjs.org/react-native-fast-image/-/react-native-fast-image-8.5.11.tgz"
+  "version" "8.5.11"
 
 "react-native-flip-card-plus@^1.0.4":
   "integrity" "sha512-fu/HWnYGHCE9U1aD1+4cbWO52SPZAVVY6HbR4CPXhMgU3S6XJkCau1f975d21Mv6WVBGuyjyCPfYGJjO8iXdQw=="
@@ -11092,6 +11104,11 @@
   "resolved" "https://registry.npmjs.org/react-native-swipe-gestures-plus/-/react-native-swipe-gestures-plus-1.1.2.tgz"
   "version" "1.1.2"
 
+"react-native-swipe-list-view@^3.2.9":
+  "integrity" "sha512-SjAEuHc/D6ovp+RjDUhfNmw6NYOntdT7+GFhfMGfP/BSLMuMWynpzJy9GKQeyB8sI78T6Lzip21TVbongOg1Mw=="
+  "resolved" "https://registry.npmjs.org/react-native-swipe-list-view/-/react-native-swipe-list-view-3.2.9.tgz"
+  "version" "3.2.9"
+
 "react-native-unimodules@^0.14.6":
   "integrity" "sha512-nYH/x9pqd8MsGVv5qEzNnUxQkdoCOsLtw+44YAnLPuntdcSZcLOCMstM/ee1gkrq1hFbo0Djj7UK/XMcjz+Tnw=="
   "resolved" "https://registry.npmjs.org/react-native-unimodules/-/react-native-unimodules-0.14.6.tgz"
@@ -11118,7 +11135,7 @@
     "prop-types" "^15.6.2"
     "yargs" "^13.2.2"
 
-"react-native@*", "react-native@^0.60.6 || ^0.61.5 || ^0.62.2 || ^0.63.2 || ^0.64.0 || 1000.0.0", "react-native@^0.64.0", "react-native@>= 0.55.x", "react-native@>= 0.62", "react-native@>=0.20.0", "react-native@>=0.35", "react-native@>=0.40", "react-native@>=0.40.0", "react-native@>=0.42.0", "react-native@>=0.57", "react-native@>=0.57 <=0.62", "react-native@>=0.57.0", "react-native@>=0.59", "react-native@>=0.60.0", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@>0.62.0":
+"react-native@*", "react-native@^0.60.6 || ^0.61.5 || ^0.62.2 || ^0.63.2 || ^0.64.0 || 1000.0.0", "react-native@^0.64.0", "react-native@>= 0.55.x", "react-native@>= 0.62", "react-native@>=0.20.0", "react-native@>=0.23.1", "react-native@>=0.35", "react-native@>=0.40", "react-native@>=0.40.0", "react-native@>=0.42.0", "react-native@>=0.57", "react-native@>=0.57 <=0.62", "react-native@>=0.57.0", "react-native@>=0.59", "react-native@>=0.60.0", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@>0.62.0":
   "integrity" "sha512-8dhSHBthgGwAjU+OjqUEA49229ThPMQH7URH0u8L0xoQFCnZO2sZ9Wc6KcbxI0x9KSmjCMFFZqRe3w3QsRv64g=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.0.tgz"
   "version" "0.64.0"
@@ -11187,7 +11204,7 @@
     "react-is" "^16.8.6"
     "scheduler" "^0.17.0"
 
-"react@*", "react@^16.0", "react@^16.0.0", "react@^16.3.0", "react@^16.7.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0", "react@>= 16.x.x", "react@>=15.4.0 || >=16.x", "react@>=16.8", "react@>=16.8.6", "react@16 || 17", "react@16.11.0", "react@16.x.x", "react@17.0.1":
+"react@*", "react@^16.0", "react@^16.0.0", "react@^16.3.0", "react@^16.7.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.6 || ^17.0.0", "react@>= 16.x.x", "react@>=0.14.8", "react@>=15.4.0 || >=16.x", "react@>=16.8", "react@>=16.8.6", "react@16 || 17", "react@16.11.0", "react@16.x.x", "react@17.0.1":
   "integrity" "sha512-M5Y8yITaLmU0ynd0r1Yvfq98Rmll6q8AxaEe88c8e7LxO8fZ2cNgmFt0aGAS9wzf1Ao32NKXtCl+/tVVtkxq6g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.11.0.tgz"
   "version" "16.11.0"

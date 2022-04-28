@@ -11,7 +11,13 @@ import {Icon, ListItem, Text, Card, Button} from 'react-native-elements';
 
 export default function RestaurantDisplay({navigation, route}) {
   const textCont = useContext(TextContext);
-  let sortedRestaurants = route.params.restaurantList.filter(rest => {
+  let restaurants = [];
+  for (const restaurant of route.params.restaurantList) {
+    if (restaurant.Profile && restaurant.Profile.restaurantInfo) {
+      restaurants.push(restaurant);
+    }
+  }
+  let sortedRestaurants = restaurants.filter(rest => {
     let name = rest.Profile.restaurantInfo.restaurantName;
     return name.toLowerCase().includes(textCont.textVal.toLowerCase());
   })
@@ -74,18 +80,20 @@ export default function RestaurantDisplay({navigation, route}) {
           }
 
           return (
-            <TouchableOpacity 
+            <TouchableOpacity
               key={
                 restaurant.Profile.restaurantInfo.restaurantName +
                 '_' +
                 restaurant.Profile.id
               }
-              onPress={() =>
-                navigation.navigate('MenuDisplay', {restaurant: restaurant})
+              onPress={() => {
+                console.log('detail restaurant ====>', restaurant, route.params.profile);
+                navigation.navigate('MyOrders', {restaurant: restaurant, profile: route.params.profile})
+              }
               }>
               <Card containerStyle={styles.cardStyle}>
                 <View style={styles.imageStyle}>
-                  <ImageBackground 
+                  <ImageBackground
                     source={
                       !picture
                         ? require('../../assets/chorizo-mozarella-gnocchi-bake-cropped.jpg')
@@ -133,7 +141,7 @@ export default function RestaurantDisplay({navigation, route}) {
                     <Text style={styles.subtitleStyle}>
                       {todayOpen}{" "}-{" "}
                       {todayClose}
-                    </Text>        
+                    </Text>
                   </View>
                 </View>
 

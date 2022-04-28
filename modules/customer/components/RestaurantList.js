@@ -11,6 +11,7 @@ import {Auth} from 'aws-amplify';
 import {ScrollView, View, FlatList, TouchableOpacity} from 'react-native';
 import Select2 from "react-native-select-two";
 import SearchBar from "react-native-dynamic-search-bar";
+import MyOrdersScreen from "./subcomponents/MyOrdersScreen";
 
 const OrderStack = createStackNavigator();
 const Stack = createStackNavigator();
@@ -44,7 +45,9 @@ export default class RestaurantList extends React.Component {
   }
 
   render() {
+      console.log('restaurant list ====>', this.state.restaurantList);
     return (
+        // <View></View>
       <Stack.Navigator
         initialRouteName="OrderStack"
         mode="modal"
@@ -114,11 +117,12 @@ const OrderStackStructure = ({navigation, route}) => {
           component={RestaurantDisplay}
           initialParams={{
             restaurantList: route.params.restaurantList,
+            profile: route.params.profile,
           }}
           options={() => ({
             headerTitle: (props) => {
               return (
-                <View style={{flexDirection: 'row',  alignItems: 'center', justifyContent:'center', marginBottom:20}}> 
+                <View style={{flexDirection: 'row',  alignItems: 'center', justifyContent:'center', marginBottom:20}}>
                   <RestSearchBar/>
                   {/* <SearchBar
                     placeholder="Search here"
@@ -164,7 +168,7 @@ const OrderStackStructure = ({navigation, route}) => {
                       <View style={{width:'90%'}}>
                         <Text numberOfLines={1} style={{textAlign:'center'}}>{route.params.profile.customerInfo.address?.address}</Text>
                       </View>
-                      
+
                     </View>
                   </TouchableOpacity> */}
                 </View>
@@ -173,6 +177,14 @@ const OrderStackStructure = ({navigation, route}) => {
             // title: route.params.profile.customerInfo.address?.address, //TODO: Populate with actual address
           })}
         />
+          <OrderStack.Screen
+              name="MyOrders"
+              component={MyOrdersScreen}
+              options={() => ({
+                  title: 'My Orders',
+                  headerBackTitle: '',
+              })}
+          />
         <OrderStack.Screen
           name="MenuDisplay"
           component={MenuDisplay}
