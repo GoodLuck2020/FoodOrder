@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
-        fontSize: 20,
+        fontSize: 16,
+        fontWeight: 'bold'
     },
 
     outlineText: {

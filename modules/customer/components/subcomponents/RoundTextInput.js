@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'white',
         paddingVertical: 2,
-        borderRadius: 30,
+        borderRadius: 15,
         paddingHorizontal: 17,
         backgroundColor: 'white',
         shadowColor: 'black',
@@ -375,8 +375,8 @@ const styles = StyleSheet.create({
     },
 
     labelText: {
-        color: 'rgba(255, 255, 255, 0.7)',
-        fontSize: 16,
+        color: '#7D849A',
+        fontSize: 14,
         marginBottom: 5,
     },
 

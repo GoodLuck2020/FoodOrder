@@ -12,6 +12,7 @@ import {ScrollView, View, FlatList, TouchableOpacity} from 'react-native';
 import Select2 from "react-native-select-two";
 import SearchBar from "react-native-dynamic-search-bar";
 import MyOrdersScreen from "./subcomponents/MyOrdersScreen";
+import CheckoutScreen from "./subcomponents/CheckoutScreen";
 
 const OrderStack = createStackNavigator();
 const Stack = createStackNavigator();
@@ -182,6 +183,14 @@ const OrderStackStructure = ({navigation, route}) => {
               component={MyOrdersScreen}
               options={() => ({
                   title: 'My Orders',
+                  headerBackTitle: '',
+              })}
+          />
+          <OrderStack.Screen
+              name="Checkout"
+              component={CheckoutScreen}
+              options={({navigation, route}) => ({
+                  title: 'Checkout',
                   headerBackTitle: '',
               })}
           />

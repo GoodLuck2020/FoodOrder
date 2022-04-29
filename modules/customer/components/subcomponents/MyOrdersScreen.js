@@ -10,6 +10,8 @@ import Styles from "../../../theme/Styles";
 import Images from "../../../theme/Images";
 import RoundTextInput from "./RoundTextInput";
 import RoundButton from "./RoundButton";
+import {Button} from "react-native-elements";
+import Modal from "react-native-modal";
 
 const sWidth = Dimensions.get('window').width;
 
@@ -22,7 +24,9 @@ export default class MyOrdersScreen extends Component {
             profile: null,
             menuItems: [],
             promoCode: '',
-            promoCodeError: ''
+            promoCodeError: '',
+
+            isShowSelectPaymentModal: false
         };
     }
 
@@ -43,14 +47,24 @@ export default class MyOrdersScreen extends Component {
     willFocusPage = () => {
         if (this.props.route && this.props.route.params) {
             const {restaurant, profile} = this.props.route.params;
-            const menu = restaurant  ? JSON.parse(restaurant.Menu) : {};
-            const items = menu ? menu.items : [];
+            const objectConstructor = ({}).constructor;
+            const menu = restaurant && restaurant.Menu && restaurant.Menu.constructor != objectConstructor ? JSON.parse(restaurant.Menu) : null;
+            let items = [];
+            if (menu) {
+                if (menu.items) {
+                    items = menu.items;
+                } else {
+                    items = menu;
+                }
+            }
             for (let i = 0; i < items.length; i++) {
                 items[i]['key'] = i;
                 items[i]['quantity'] = 1;
+                items[i]['item_price'] = items[i]['price'] ? items[i]['price'] : (items[i]['item_price'] ? items[i]['item_price'] : '0.0')
+                items[i]['item_name'] = items[i]['itemName'] ? items[i]['itemName'] : (items[i]['item_name'] ? items[i]['item_name'] : '')
+                items[i]['item_description'] = items[i]['description'] ? items[i]['description'] : (items[i]['item_description'] ? items[i]['item_description'] : '')
             }
             this.setState({restaurant, profile, menuItems: items});
-            console.log('restaurant ====>', restaurant, profile, items);
         }
     }
 
@@ -106,18 +120,18 @@ export default class MyOrdersScreen extends Component {
     ////////////////////////////////////////////////////////////////////////////
     _renderMenus() {
         const { restaurant, menuItems } = this.state;
-        console.log('menu items ====>', restaurant, menuItems);
 
         return (
             <View style={{flex: 1, flexGrow: 1}}>
                 <SwipeListView
                     style={styles.listContainer}
                     data={menuItems}
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={(item, index) => item.key}
                     renderItem={({item, index}) => {
                         const menuImage = item.picture ? {uri: item.picture} : Images.icon_food_placeholder;
-                        const menuTitle = item.itemName || '';
-                        const price = item.price || '0.0';
+                        const menuTitle = item.item_name || '';
+                        const price = item.item_price || '0.0';
                         const quantity = item.quantity + '';
                         return (
                             <View style={styles.menuWrapper}>
@@ -181,7 +195,12 @@ export default class MyOrdersScreen extends Component {
     }
 
     onTrash(key) {
-        console.log('on trash ====>', key);
+        const { menuItems } = this.state;
+        const index = menuItems.findIndex((item) => item.key == key);
+        if (index >= 0) {
+            menuItems.splice(index, 1);
+        }
+        this.setState({menuItems});
     }
 
     onPlusQuantity(item) {
@@ -213,7 +232,7 @@ export default class MyOrdersScreen extends Component {
         let delivery = 0;
         let total = 0;
         for (const item of menuItems) {
-            subtotal += item.price * item.quantity;
+            subtotal += item.item_price * item.quantity;
         }
         total = subtotal + delivery;
         return (
@@ -223,6 +242,7 @@ export default class MyOrdersScreen extends Component {
                     <RoundTextInput
                         style={{width: 200}}
                         type="text"
+                        textAlign={'right'}
                         value={promoCode}
                         errorMessage={promoCodeError}
                         returnKeyType="next"
@@ -232,7 +252,7 @@ export default class MyOrdersScreen extends Component {
                 <View style={styles.subTotalWrapper}>
                     <View style={Styles.rowCenterBetween}>
                         <Text style={styles.totalTitleText}>Subtotal</Text>
-                        <Text style={styles.totalTitleText}>${subtotal.toFixed(1)}</Text>
+                        <Text style={styles.totalTitleText}>${subtotal.toFixed(2)}</Text>
                     </View>
                     <View style={[Styles.rowCenterBetween, Styles.mt1]}>
                         <Text style={styles.deliveryTitleText}>Delivery</Text>
@@ -241,7 +261,7 @@ export default class MyOrdersScreen extends Component {
                 </View>
                 <View style={[Styles.rowCenterBetween, Styles.mt2]}>
                     <Text style={styles.totalTitleText}>Total</Text>
-                    <Text style={styles.totalTitleText}>${total.toFixed(1)}</Text>
+                    <Text style={styles.totalTitleText}>${total.toFixed(2)}</Text>
                 </View>
             </View>
         )
@@ -251,11 +271,13 @@ export default class MyOrdersScreen extends Component {
     ////////////////////////////// Footer //////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     _renderFooter() {
+        let delivery = 0;
+        let total = this.getSubTotal() + delivery;
         return (
             <View style={styles.footerWrapper}>
                 <RoundButton
                     theme={'main'}
-                    enabled={true}
+                    enabled={total > 0 ? true : false}
                     title={'CHECKOUT'}
                     onPress={this.onCheckOut}
                 />
@@ -264,9 +286,22 @@ export default class MyOrdersScreen extends Component {
     }
 
     onCheckOut = () => {
-
+        const { menuItems, profile, restaurant, promoCode } = this.state;
+        if (promoCode == null || promoCode.length == 0) {
+            this.setState({promoCodeError: 'Please input a valid code'});
+        } else {
+            this.props.navigation.navigate('Checkout', {items: menuItems, promoCode: promoCode, restaurant, profile});
+        }
     }
 
+    getSubTotal() {
+        const { menuItems } = this.state;
+        let subtotal = 0;
+        for (const item of menuItems) {
+            subtotal += item.item_price * item.quantity;
+        }
+        return parseFloat(subtotal.toFixed(2));
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////// Render //////////////////////////////////////
@@ -414,6 +449,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     totalWrapper: {
+        paddingTop: 10,
         marginHorizontal: 15,
         paddingBottom: 30
     },
