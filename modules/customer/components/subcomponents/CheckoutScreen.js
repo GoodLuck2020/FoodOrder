@@ -231,7 +231,7 @@ export default class CheckoutScreen extends Component {
                                     );
 
                                     let data = await response.json();
-                                    console.log('order payment =====>', data);
+                                    console.log('payment =====>', data);
 
                                     if (data.statusCode === 200) {
                                         let orderDetail = {
@@ -254,6 +254,8 @@ export default class CheckoutScreen extends Component {
                                             },
                                         };
 
+                                        console.log('submit order =====>', orderDetail);
+
                                         let response = await fetch(
                                             'https://9yl3ar8isd.execute-api.us-west-1.amazonaws.com/beta/setuporders',
                                             {
@@ -271,8 +273,6 @@ export default class CheckoutScreen extends Component {
                                                 body: JSON.stringify(orderDetail),
                                             },
                                         );
-
-                                        console.log('submit order =====>', await response.json());
 
                                         this.props.navigation.popToTop();
 

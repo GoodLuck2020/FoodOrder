@@ -87,7 +87,6 @@ export default function RestaurantDisplay({navigation, route}) {
                 restaurant.Profile.id
               }
               onPress={() => {
-                console.log('detail restaurant ====>', restaurant, route.params.profile);
                 navigation.navigate('MyOrders', {restaurant: restaurant, profile: route.params.profile})
               }
               }>

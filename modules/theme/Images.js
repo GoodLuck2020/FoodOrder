@@ -1,4 +1,6 @@
 const Images = {
+    login_bg: require('../assets/bg.png'),
+    logo: require('../assets/logo_white.png'),
     icon_location: require('../assets/icon_location.png'),
     icon_star: require('../assets/icon_star.png'),
     icon_restaurant_placeholder: require('../assets/chorizo-mozarella-gnocchi-bake-cropped.jpg'),

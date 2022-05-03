@@ -8,13 +8,15 @@
 import React from 'react';
 import {SignIn} from 'aws-amplify-react-native';
 import {
-  ImageBackground,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Platform,
+    ImageBackground,
+    Image,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Platform,
+    Dimensions,
+    SafeAreaView
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -23,7 +25,14 @@ import {
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Input, Button} from 'react-native-elements';
 import {Auth} from 'aws-amplify';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {AuthState} from '@aws-amplify/ui-components';
+
+import Images from "../theme/Images";
+
+const sWidth = Dimensions.get('window').width;
+const sHeight = Dimensions.get('window').height;
+
 export default class signIn extends React.Component {
   constructor(props) {
     super(props);
@@ -54,92 +63,82 @@ export default class signIn extends React.Component {
       this.props.authState == 'signedUp'
     ) {
       return (
-        <ImageBackground
-          source={require('../assets/bg.png')}
-          style={{
-            width: wp('100'),
-            height: hp('100'),
-            marginTop: Platform.OS == 'ios' ? -20 : 0,
-          }}>
-          <View
-            style={{
-              paddingLeft: 24,
-              paddingRight: 24,
-              paddingTop: 64,
-              paddingBottom: 24,
-              flex: 1,
-            }}>
-            <View style={{flex: 1}}>
-              <Image
-                source={require('../assets/logo_white.png')}
-                style={style.logo}
-                resizeMode="cover"
-              />
-              {/* <Text style={style.signintext}>Sign in to continue</Text> */}
-              <View style={{marginTop: 50}}>
-                <Input
-                  autoCapitalize="none"
-                  placeholder="Email Address"
-                  placeholderTextColor="white"
-                  TextColor="white"
-                  inputStyle={{color: 'white'}}
-                  containerStyle={{paddingHorizontal: 0}}
-                  inputContainerStyle={{
-                    borderBottomColor: '#ffffff88',
-                    borderBottomWidth: 1,
-                    marginLeft: 0,
-                  }}
-                  onChangeText={value => this.setState({email: value})}
-                />
-                <Input
-                  autoCapitalize="none"
-                  placeholder="Password"
-                  placeholderTextColor="white"
-                  inputStyle={{color: 'white'}}
-                  containerStyle={{paddingHorizontal: 0}}
-                  inputContainerStyle={{
-                    borderBottomColor: '#ffffff88',
-                    borderBottomWidth: 1,
-                  }}
-                  secureTextEntry={true}
-                  onChangeText={value => this.setState({password: value})}
-                />
-                <Button
-                  title="SIGN IN"
-                  buttonStyle={{
-                    backgroundColor: '#F86D64',
-                    paddingTop: 15,
-                    paddingBottom: 15,
-                    marginTop: 30,
-                  }}
-                  onPress={this.signin}
-                />
-                <TouchableOpacity
-                  style={{marginTop: 30}}
-                  onPress={() => this.props.onStateChange('forgotPassword')}>
-                  <Text style={style.forgot}>Forgot your password?</Text>
-                </TouchableOpacity>
-                {this.state.error != '' && (
-                  <Text style={style.error}>{this.state.error}</Text>
-                )}
-              </View>
-            </View>
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-              }}>
-              <Text style={style.forgot}>Already have an account? </Text>
-              <TouchableOpacity
-                onPress={() => this.props.onStateChange('signUp')}>
-                <Text style={[style.forgot, {fontWeight: 'bold'}]}>
-                  SIGN UP
-                </Text>
-              </TouchableOpacity>
-            </View>
+          <View style={{flex: 1}}>
+              <Image source={Images.login_bg} style={styles.loginBg} />
+              <SafeAreaView style={{flex: 1}}>
+                  <View style={styles.container}>
+                      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                          <View style={styles.contentView}>
+                              <View style={{flex: 1}}>
+                                  <Image
+                                      source={Images.logo}
+                                      style={styles.logo}
+                                      resizeMode="cover"
+                                  />
+                                  {/* <Text style={style.signintext}>Sign in to continue</Text> */}
+                                  <View style={{marginTop: 50}}>
+                                      <Input
+                                          autoCapitalize="none"
+                                          placeholder="Email Address"
+                                          placeholderTextColor="white"
+                                          TextColor="white"
+                                          inputStyle={{color: 'white'}}
+                                          containerStyle={{paddingHorizontal: 0}}
+                                          inputContainerStyle={{
+                                              borderBottomColor: '#ffffff88',
+                                              borderBottomWidth: 1,
+                                              marginLeft: 0,
+                                          }}
+                                          onChangeText={value => this.setState({email: value, error: ''})}
+                                      />
+                                      <Input
+                                          autoCapitalize="none"
+                                          placeholder="Password"
+                                          placeholderTextColor="white"
+                                          inputStyle={{color: 'white'}}
+                                          containerStyle={{paddingHorizontal: 0}}
+                                          inputContainerStyle={{
+                                              borderBottomColor: '#ffffff88',
+                                              borderBottomWidth: 1,
+                                          }}
+                                          secureTextEntry={true}
+                                          onChangeText={value => this.setState({password: value, error: ''})}
+                                      />
+                                      <Button
+                                          title="SIGN IN"
+                                          buttonStyle={{
+                                              backgroundColor: '#F86D64',
+                                              paddingTop: 15,
+                                              paddingBottom: 15,
+                                              marginTop: 30,
+                                          }}
+                                          onPress={this.signin}
+                                      />
+                                      {this.state.error != '' && (
+                                          <Text style={styles.error}>{this.state.error}</Text>
+                                      )}
+                                      <TouchableOpacity
+                                          style={{marginTop: 15}}
+                                          onPress={() => this.props.onStateChange('forgotPassword')}>
+                                          <Text style={styles.forgot}>Forgot your password?</Text>
+                                      </TouchableOpacity>
+                                      <Button
+                                          title="SIGN UP"
+                                          buttonStyle={{
+                                              backgroundColor: '#F86D64',
+                                              paddingTop: 15,
+                                              paddingBottom: 15,
+                                              marginTop: 30,
+                                          }}
+                                          onPress={() => this.props.onStateChange('signUp')}
+                                      />
+                                  </View>
+                              </View>
+                          </View>
+                      </KeyboardAwareScrollView>
+                  </View>
+              </SafeAreaView>
           </View>
-        </ImageBackground>
       );
     } else {
       return null;
@@ -147,12 +146,29 @@ export default class signIn extends React.Component {
   }
 }
 
-const style = StyleSheet.create({
-  logo: {
-    width: wp('80'),
-    height: wp('23'),
-    alignSelf: 'center',
-  },
+const styles = StyleSheet.create({
+    loginBg: {
+        position: 'absolute',
+        left: -10,
+        top: -50,
+        width: sWidth + 20,
+        height: sHeight + 30,
+        resizeMode: 'cover',
+    },
+    logo: {
+        width: sWidth - 50,
+        height: 100,
+        resizeMode: 'contain',
+    },
+    container: {
+        flex: 1,
+    },
+    contentView: {
+        flex: 1,
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: (sHeight - 600) / 2
+    },
   signintext: {
     color: 'white',
     fontSize: RFValue(17, 580),
@@ -166,6 +182,7 @@ const style = StyleSheet.create({
   error: {
     color: '#FB322F',
     textAlign: 'center',
-    marginTop: 15,
+    marginTop: 10,
   },
+
 });

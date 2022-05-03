@@ -46,7 +46,6 @@ export default class RestaurantList extends React.Component {
   }
 
   render() {
-      console.log('restaurant list ====>', this.state.restaurantList);
     return (
         // <View></View>
       <Stack.Navigator
