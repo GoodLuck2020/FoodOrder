@@ -23,6 +23,7 @@ import {Alert} from 'react-native';
 import AWS from 'aws-sdk';
 import {decode} from 'base64-arraybuffer';
 import config from '../../customer/config';
+import Styles from "../../theme/Styles";
 
 var profile;
 //var profile = testProfile();
@@ -113,7 +114,7 @@ export default class Profile extends React.Component {
             needsUpdate: false,
           }} //make sure that on navigation to menu we check needsUpdate
           options={({navigation, route}) => ({
-            title: 'Edit Profile',
+            title: 'Profile',
             headerRight: props =>
               !route.params.edit ? (
                 <Button
@@ -303,12 +304,6 @@ function EditProfile({navigation, route}) {
   return (
     <ScrollView>
       <View>
-        <View
-          style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-          <Icon name="delete" color="red" raised onPress={remove} />
-          <Text style={{color: 'red'}}>DELETE Restaurant</Text>
-        </View>
-
         <Text h4 style={styles.titles} h4Style={{fontSize: RFValue(15, 580)}}>
           Restaurant Information
         </Text>
@@ -317,7 +312,7 @@ function EditProfile({navigation, route}) {
             display: 'flex',
             flexDirection: 'row',
             padding: 10,
-            alignItems: 'center',
+            alignItems: 'flex-start',
           }}>
           <TouchableOpacity style={[styles.picture]} onPress={openpicker}>
             {image || profile.picture ? (
@@ -338,6 +333,7 @@ function EditProfile({navigation, route}) {
           <View style={{flex: 1}}>
             <View>
               <Input
+                containerStyle={{height: 70}}
                 label="Restaurant Name"
                 inputStyle={styles.input}
                 inputContainerStyle={{borderBottomWidth: 0}}
@@ -355,6 +351,56 @@ function EditProfile({navigation, route}) {
                 }
               />
               <Input
+                  containerStyle={{height: 70}}
+                  label="Restaurant Email"
+                  inputStyle={styles.input}
+                  inputContainerStyle={{borderBottomWidth: 0}}
+                  placeholder="Restaurant Email"
+                  disabled={true}
+                  value={profiledata.restaurantInfo.restaurantEmail}
+              />
+              <Input
+                  containerStyle={{height: 70}}
+                  label="Facebook"
+                  inputStyle={styles.input}
+                  inputContainerStyle={{borderBottomWidth: 0}}
+                  placeholder="Facebook link"
+                  autoCapitalize={'none'}
+                  placeholderTextColor={'#ccc'}
+                  disabled={!route.params.edit}
+                  value={profiledata.restaurantInfo.restaurantFacebook}
+                  onChangeText={value =>
+                      setprofiledata({
+                        ...profiledata,
+                        restaurantInfo: {
+                          ...profiledata.restaurantInfo,
+                          restaurantFacebook: value,
+                        },
+                      })
+                  }
+              />
+              <Input
+                  containerStyle={{height: 70}}
+                  label="Instagram"
+                  inputStyle={styles.input}
+                  inputContainerStyle={{borderBottomWidth: 0}}
+                  placeholder="Instagram link"
+                  autoCapitalize={'none'}
+                  placeholderTextColor={'#ccc'}
+                  disabled={!route.params.edit}
+                  value={profiledata.restaurantInfo.restaurantInstagram}
+                  onChangeText={value =>
+                      setprofiledata({
+                        ...profiledata,
+                        restaurantInfo: {
+                          ...profiledata.restaurantInfo,
+                          restaurantInstagram: value,
+                        },
+                      })
+                  }
+              />
+              <Input
+                containerStyle={{height: 70}}
                 label="Restaurant Phone Number"
                 inputStyle={styles.input}
                 inputContainerStyle={{borderBottomWidth: 0}}
@@ -648,6 +694,11 @@ function EditProfile({navigation, route}) {
               onPress={saveprofile}
               buttonStyle={styles.buttonStyle}
             />
+            <View
+                style={[Styles.rowCenter, {justifyContent: 'center'}]}>
+              <Icon name="delete" color="red" raised onPress={remove} />
+              <Text style={{color: 'red'}}>DELETE Restaurant</Text>
+            </View>
           </View>
         ) : (
           <View style={{paddingLeft: 15, paddingRight: 15}}>
@@ -657,6 +708,11 @@ function EditProfile({navigation, route}) {
               title={'Sign Out'}
               onPress={() => Auth.signOut()}
             />
+            <View
+                style={[Styles.rowCenter, {justifyContent: 'center'}]}>
+              <Icon name="delete" color="red" raised onPress={remove} />
+              <Text style={{color: 'red'}}>DELETE Restaurant</Text>
+            </View>
           </View>
         )}
         <Loading visible={loading} />
@@ -832,7 +888,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   signOutButton: {
-    padding: 15,
+    paddingTop: 15,
     marginLeft: 15,
     marginRight: 15,
   },

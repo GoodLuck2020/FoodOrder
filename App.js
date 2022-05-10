@@ -93,7 +93,15 @@ class App extends React.Component {
         is_customer: false,
         email: info.attributes.email,
         phoneNumber: info.attributes.phone_number,
+        poc_name: 'poc name',
+        business_name: 'business name',
+        street_business: 'street business',
+        city_business: 'city business',
+        state_business: 'state business',
+        zip: 'zip',
+        website: 'website'
       });
+
       let token = null;
       let prom = Auth.currentSession().then(
         info => (token = info.getIdToken().getJwtToken()),
