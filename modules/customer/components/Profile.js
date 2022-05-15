@@ -30,6 +30,7 @@ import {Auth} from 'aws-amplify';
 import AWS from 'aws-sdk';
 import {decode} from 'base64-arraybuffer';
 import config from '../../customer/config';
+import DisabledInput from "./subcomponents/DisabledInput";
 
 var profile;
 //var profile = testProfile();
@@ -306,6 +307,7 @@ function Edit({navigation, route}) {
     }
   });
 
+  const isEditMode = route.params.edit;
   return (
     <ScrollView>
       <View style={styles.general}>
@@ -337,213 +339,277 @@ function Edit({navigation, route}) {
             )}
           </TouchableOpacity>
           <View style={{flex: 1}}>
-            <Input
-              label="First Name"
-              inputContainerStyle={{borderBottomWidth: 0}}
-              placeholder="First Name"
-              disabled={!route.params.edit}
-              value={profiledata.customerInfo.customerName.firstName}
-              onChangeText={value =>
-                setProfiledata({
-                  ...profiledata,
-                  customerInfo: {
-                    ...profiledata.customerInfo,
-                    customerName: {
-                      ...profiledata.customerInfo.customerName,
-                      firstName: value,
-                    },
-                  },
-                })
-              }
-              inputStyle={styles.input}
-            />
-            <Input
-              label="Last Name"
-              inputContainerStyle={{borderBottomWidth: 0}}
-              placeholder="Last Name"
-              disabled={!route.params.edit}
-              value={profiledata.customerInfo.customerName.lastName}
-              onChangeText={value =>
-                setProfiledata({
-                  ...profiledata,
-                  customerInfo: {
-                    ...profiledata.customerInfo,
-                    customerName: {
-                      ...profiledata.customerInfo.customerName,
-                      lastName: value,
-                    },
-                  },
-                })
-              }
-              inputStyle={styles.input}
-            />
+              {isEditMode ? (
+                  <Input
+                      label="First Name"
+                      inputContainerStyle={{borderBottomWidth: 0}}
+                      placeholder="First Name"
+                      disabled={!route.params.edit}
+                      value={profiledata.customerInfo.customerName.firstName}
+                      onChangeText={value =>
+                          setProfiledata({
+                              ...profiledata,
+                              customerInfo: {
+                                  ...profiledata.customerInfo,
+                                  customerName: {
+                                      ...profiledata.customerInfo.customerName,
+                                      firstName: value,
+                                  },
+                              },
+                          })
+                      }
+                      inputStyle={styles.input}
+                  />
+              ) :  (
+                  <DisabledInput
+                      label={'First Name'}
+                      value={profiledata.customerInfo.customerName.firstName}
+                  />
+              )}
+
+              {isEditMode ? (
+                  <Input
+                      label="Last Name"
+                      inputContainerStyle={{borderBottomWidth: 0}}
+                      placeholder="Last Name"
+                      disabled={!route.params.edit}
+                      value={profiledata.customerInfo.customerName.lastName}
+                      onChangeText={value =>
+                          setProfiledata({
+                              ...profiledata,
+                              customerInfo: {
+                                  ...profiledata.customerInfo,
+                                  customerName: {
+                                      ...profiledata.customerInfo.customerName,
+                                      lastName: value,
+                                  },
+                              },
+                          })
+                      }
+                      inputStyle={styles.input}
+                  />
+              ) : (
+                  <DisabledInput
+                      label={'Last Name'}
+                      value={profiledata.customerInfo.customerName.lastName}
+                  />
+              )}
           </View>
         </View>
         <View>
-          <Input
-            label="Customer Address"
-            inputContainerStyle={{borderBottomWidth: 0}}
-            placeholder="Address"
-            disabled={!route.params.edit}
-            value={profiledata.customerInfo.address?.address}
-            onChangeText={value =>
-              setProfiledata({
-                ...profiledata,
-                customerInfo: {
-                  ...profiledata.customerInfo,
-                  address: {
-                    ...profiledata.customerInfo.address,
-                    address: value,
-                  },
-                },
-              })
-            }
-            inputStyle={styles.input}
-          />
-          <Input
-            label="Customer City"
-            inputContainerStyle={{borderBottomWidth: 0}}
-            placeholder="Customer City"
-            disabled={!route.params.edit}
-            value={profile.customerInfo.address?.city}
-            onChangeText={value =>
-              setProfiledata({
-                ...profiledata,
-                customerInfo: {
-                  ...profiledata.customerInfo,
-                  address: {
-                    ...profiledata.customerInfo.address,
-                    city: value,
-                  },
-                },
-              })
-            }
-            inputStyle={styles.input}
-          />
+            {isEditMode ? (
+                <Input
+                    label="Customer Address"
+                    inputContainerStyle={{borderBottomWidth: 0}}
+                    placeholder="Address"
+                    disabled={!route.params.edit}
+                    value={profiledata.customerInfo.address?.address}
+                    onChangeText={value =>
+                        setProfiledata({
+                            ...profiledata,
+                            customerInfo: {
+                                ...profiledata.customerInfo,
+                                address: {
+                                    ...profiledata.customerInfo.address,
+                                    address: value,
+                                },
+                            },
+                        })
+                    }
+                    inputStyle={styles.input}
+                />
+            ) : (
+                <DisabledInput
+                    label={'Customer Address'}
+                    value={profiledata.customerInfo.address?.address}
+                />
+            )}
+
+            {isEditMode ? (
+                <Input
+                    label="Customer City"
+                    inputContainerStyle={{borderBottomWidth: 0}}
+                    placeholder="Customer City"
+                    disabled={!route.params.edit}
+                    value={profile.customerInfo.address?.city}
+                    onChangeText={value =>
+                        setProfiledata({
+                            ...profiledata,
+                            customerInfo: {
+                                ...profiledata.customerInfo,
+                                address: {
+                                    ...profiledata.customerInfo.address,
+                                    city: value,
+                                },
+                            },
+                        })
+                    }
+                    inputStyle={styles.input}
+                />
+            ) : (
+                <DisabledInput
+                    label={'Customer City'}
+                    value={profile.customerInfo.address?.city}
+                />
+            )}
+
           <View
             style={{
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
+              justifyContent: 'space-between'
             }}>
-            <View>
-              <SelectPicker
-                items={Object.keys(state).map(item => ({
-                  label: state[item],
-                  value: item,
-                }))}
-                placeholder={{label: 'State'}}
-                textInputProps={{
-                  style: {
-                    width: wp('100') / 2,
-                    height: 40,
-                    marginLeft: 15,
-                    backgroundColor: 'white',
-                    borderRadius: 8,
-                    borderColor: '#AAA',
-                    borderWidth: 1,
-                    padding: 5,
-                    fontSize: RFValue(15, 580),
-                    color: '#888',
-                  },
-                }}
-                style={{
-                  backgroundColor: 'white',
-                }}
-                value={profiledata.customerInfo.address?.state}
-                onValueChange={value =>
-                  setProfiledata({
-                    ...profiledata,
-                    customerInfo: {
-                      ...profiledata.customerInfo,
-                      address: {
-                        ...profiledata.customerInfo.address,
-                        state: value,
-                      },
-                    },
-                  })
-                }
-                disabled={!route.params.edit}
-              />
+            <View style={{width: '45%'}}>
+                {isEditMode ? (
+                    <SelectPicker
+                        items={Object.keys(state).map(item => ({
+                            label: state[item],
+                            value: item,
+                        }))}
+                        placeholder={{label: 'State'}}
+                        textInputProps={{
+                            style: {
+                                width: wp('100') / 2,
+                                height: 40,
+                                marginLeft: 15,
+                                backgroundColor: 'white',
+                                borderRadius: 8,
+                                borderColor: '#AAA',
+                                borderWidth: 1,
+                                padding: 5,
+                                fontSize: RFValue(15, 580),
+                                color: '#888',
+                            },
+                        }}
+                        style={{
+                            backgroundColor: 'white',
+                        }}
+                        value={profiledata.customerInfo.address?.state}
+                        onValueChange={value =>
+                            setProfiledata({
+                                ...profiledata,
+                                customerInfo: {
+                                    ...profiledata.customerInfo,
+                                    address: {
+                                        ...profiledata.customerInfo.address,
+                                        state: value,
+                                    },
+                                },
+                            })
+                        }
+                        disabled={!route.params.edit}
+                    />
+                ) : (
+                    <DisabledInput
+                        label={'State'}
+                        value={profiledata.customerInfo.address?.state}
+                    />
+                )}
+
             </View>
-            <View style={{flex: 1}}>
-              <Input
-                label="Zip Code"
-                inputStyle={styles.input}
-                placeholder="Zip Code"
-                inputContainerStyle={{borderBottomWidth: 0}}
-                disabled={!route.params.edit}
-                value={profiledata.customerInfo.address?.zipcode}
-                onChangeText={value =>
-                  setProfiledata({
-                    ...profiledata,
-                    customerInfo: {
-                      ...profiledata.customerInfo,
-                      address: {
-                        ...profiledata.customerInfo.address,
-                        zipcode: value,
-                      },
-                    },
-                  })
-                }
-              />
+            <View style={{width: '45%'}}>
+                {isEditMode ? (
+                    <Input
+                        label="Zip Code"
+                        inputStyle={styles.input}
+                        placeholder="Zip Code"
+                        inputContainerStyle={{borderBottomWidth: 0}}
+                        disabled={!route.params.edit}
+                        value={profiledata.customerInfo.address?.zipcode}
+                        onChangeText={value =>
+                            setProfiledata({
+                                ...profiledata,
+                                customerInfo: {
+                                    ...profiledata.customerInfo,
+                                    address: {
+                                        ...profiledata.customerInfo.address,
+                                        zipcode: value,
+                                    },
+                                },
+                            })
+                        }
+                    />
+                ) : (
+                    <DisabledInput
+                        label={'Zip Code'}
+                        value={profiledata.customerInfo.address?.zipcode}
+                    />
+                )}
             </View>
           </View>
-          <Input
-            label="Email Address"
-            autoCapitalize="none"
-            inputStyle={styles.input}
-            placeholder="Email Address"
-            inputContainerStyle={{borderBottomWidth: 0}}
-            disabled={!route.params.edit}
-            value={profiledata.customerInfo.contactInformation.emailAddress}
-            onChangeText={value =>
-              setProfiledata({
-                ...profiledata,
-                customerInfo: {
-                  ...profiledata.customerInfo,
-                  contactInformation: {
-                    ...profiledata.customerInfo.contactInformation,
-                    emailAddress: value,
-                  },
-                },
-              })
-            }
-          />
-          <View style={{marginLeft: 15, marginRight: 15}}>
-            <Text style={{fontSize: RFValue(12, 580), color: '#888'}}>
-              Phone Number
-            </Text>
-            <PhoneInput
-              defaultCode="US"
-              containerStyle={{
-                width: wp('100') - 30,
-                backgroundColor: 'white',
-                borderColor: '#979797',
-                borderWidth: 1,
-              }}
-              disabled={!route.params.edit}
-              value={
-                profiledata.customerInfo.contactInformation.contactNumber
-                  .phoneNumber
-              }
-              onChangeText={value =>
-                setProfiledata({
-                  ...profiledata,
-                  customerInfo: {
-                    ...profiledata.customerInfo,
-                    contactInformation: {
-                      ...profiledata.customerInfo.contactInformation,
-                      contactNumber: {
-                        ...profiledata.customerInfo.contactInformation
-                          .contactNumber,
-                        phoneNumber: value,
-                      },
-                    },
-                  },
-                })
-              }
-            />
+            {isEditMode ? (
+                <Input
+                    label="Email Address"
+                    autoCapitalize="none"
+                    inputStyle={styles.input}
+                    placeholder="Email Address"
+                    inputContainerStyle={{borderBottomWidth: 0}}
+                    disabled={!route.params.edit}
+                    value={profiledata.customerInfo.contactInformation.emailAddress}
+                    onChangeText={value =>
+                        setProfiledata({
+                            ...profiledata,
+                            customerInfo: {
+                                ...profiledata.customerInfo,
+                                contactInformation: {
+                                    ...profiledata.customerInfo.contactInformation,
+                                    emailAddress: value,
+                                },
+                            },
+                        })
+                    }
+                />
+            ) : (
+                <DisabledInput
+                    label={'Email Address'}
+                    value={profiledata.customerInfo.contactInformation.emailAddress}
+                />
+            )}
+
+          <View>
+              {isEditMode ? (
+                  <View  style={{marginLeft: 15, marginRight: 15}}>
+                      <Text style={{fontSize: RFValue(12, 580), color: '#888'}}>
+                          Phone Number
+                      </Text>
+                      <PhoneInput
+                          defaultCode="US"
+                          containerStyle={{
+                              width: wp('100') - 30,
+                              backgroundColor: 'white',
+                              borderColor: '#979797',
+                              borderWidth: 1,
+                          }}
+                          disabled={!route.params.edit}
+                          value={
+                              profiledata.customerInfo.contactInformation.contactNumber
+                                  .phoneNumber
+                          }
+                          onChangeText={value =>
+                              setProfiledata({
+                                  ...profiledata,
+                                  customerInfo: {
+                                      ...profiledata.customerInfo,
+                                      contactInformation: {
+                                          ...profiledata.customerInfo.contactInformation,
+                                          contactNumber: {
+                                              ...profiledata.customerInfo.contactInformation
+                                                  .contactNumber,
+                                              phoneNumber: value,
+                                          },
+                                      },
+                                  },
+                              })
+                          }
+                      />
+                  </View>
+              ) : (
+                  <DisabledInput
+                      label={'Phone Number'}
+                      value={profiledata.customerInfo.contactInformation.contactNumber.phoneNumber}
+                  />
+              )}
           </View>
           <View>
             <View
