@@ -611,71 +611,71 @@ function Edit({navigation, route}) {
                   />
               )}
           </View>
-          <View>
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginRight: 15,
-                alignItems: 'center',
-              }}>
-              <View style={{width: 25}} />
-              <Text h4 style={styles.titles}>
-                Payment Options
-              </Text>
-              {route.params.edit ? (
-                <Icon
-                  name="create"
-                  onPress={() => {
-                    navigation.navigate('Payment Method', {
-                      profile: profiledata,
-                    });
-                  }}
-                />
-              ) : (
-                <View style={{width: 25}} />
-              )}
-            </View>
+          {/*<View>*/}
+          {/*  <View*/}
+          {/*    style={{*/}
+          {/*      display: 'flex',*/}
+          {/*      flexDirection: 'row',*/}
+          {/*      justifyContent: 'space-between',*/}
+          {/*      marginRight: 15,*/}
+          {/*      alignItems: 'center',*/}
+          {/*    }}>*/}
+          {/*    <View style={{width: 25}} />*/}
+          {/*    <Text h4 style={styles.titles}>*/}
+          {/*      Payment Options*/}
+          {/*    </Text>*/}
+          {/*    {route.params.edit ? (*/}
+          {/*      <Icon*/}
+          {/*        name="create"*/}
+          {/*        onPress={() => {*/}
+          {/*          navigation.navigate('Payment Method', {*/}
+          {/*            profile: profiledata,*/}
+          {/*          });*/}
+          {/*        }}*/}
+          {/*      />*/}
+          {/*    ) : (*/}
+          {/*      <View style={{width: 25}} />*/}
+          {/*    )}*/}
+          {/*  </View>*/}
 
-            {profiledata.paymentOptions.cards.map((item, indexCard) => (
-              <CreditCard
-                card={item}
-                key={indexCard.toString()}
-                setDefault={() => {
-                  let profileinfo = {
-                    ...profiledata,
-                    paymentOptions: {
-                      ...profiledata.paymentOptions,
-                      cards: profiledata.paymentOptions.cards.map(
-                        (item, index) =>
-                          index === indexCard
-                            ? {...item, default: true}
-                            : {...item, default: false},
-                      ),
-                    },
-                  };
-                  setProfiledata(profileinfo);
-                  saveprofile(profileinfo);
-                }}
-                onDelete={() => {
-                  let profileinfo = {
-                    ...profiledata,
-                    paymentOptions: {
-                      ...profiledata.paymentOptions,
-                      cards: profiledata.paymentOptions.cards.filter(
-                        (item, index) => index !== indexCard,
-                      ),
-                    },
-                  };
+          {/*  {profiledata.paymentOptions.cards.map((item, indexCard) => (*/}
+          {/*    <CreditCard*/}
+          {/*      card={item}*/}
+          {/*      key={indexCard.toString()}*/}
+          {/*      setDefault={() => {*/}
+          {/*        let profileinfo = {*/}
+          {/*          ...profiledata,*/}
+          {/*          paymentOptions: {*/}
+          {/*            ...profiledata.paymentOptions,*/}
+          {/*            cards: profiledata.paymentOptions.cards.map(*/}
+          {/*              (item, index) =>*/}
+          {/*                index === indexCard*/}
+          {/*                  ? {...item, default: true}*/}
+          {/*                  : {...item, default: false},*/}
+          {/*            ),*/}
+          {/*          },*/}
+          {/*        };*/}
+          {/*        setProfiledata(profileinfo);*/}
+          {/*        saveprofile(profileinfo);*/}
+          {/*      }}*/}
+          {/*      onDelete={() => {*/}
+          {/*        let profileinfo = {*/}
+          {/*          ...profiledata,*/}
+          {/*          paymentOptions: {*/}
+          {/*            ...profiledata.paymentOptions,*/}
+          {/*            cards: profiledata.paymentOptions.cards.filter(*/}
+          {/*              (item, index) => index !== indexCard,*/}
+          {/*            ),*/}
+          {/*          },*/}
+          {/*        };*/}
 
-                  setProfiledata(profileinfo);
-                  saveprofile(profileinfo);
-                }}
-                editable={route.params.edit}
-              />
-            ))}
-          </View>
+          {/*        setProfiledata(profileinfo);*/}
+          {/*        saveprofile(profileinfo);*/}
+          {/*      }}*/}
+          {/*      editable={route.params.edit}*/}
+          {/*    />*/}
+          {/*  ))}*/}
+          {/*</View>*/}
           {route.params.edit ? (
             <View style={styles.buttoncontainer}>
               <Button
@@ -701,7 +701,7 @@ function Edit({navigation, route}) {
           ) : (
             <Button
               buttonStyle={styles.buttonStyle}
-              style={{marginLeft: 15, marginRight: 15}}
+              style={{marginLeft: 15, marginRight: 15, marginTop: 30}}
               title="Sign Out"
               onPress={() => Auth.signOut()}
             />

@@ -51,14 +51,11 @@ export default class CheckoutScreen extends Component {
 
     willFocusPage = () => {
         if (this.props.route && this.props.route.params) {
-            const {restaurant, profile, items, promoCode} = this.props.route.params;
+            const {restaurant, profile, items, promoCode, payment} = this.props.route.params;
             if (profile && profile.customerInfo && profile.customerInfo.address) {
                 this.setState({selectedAddress: profile.customerInfo.address});
             }
-            if (profile && profile.paymentOptions && profile.paymentOptions.cards) {
-                this.setState({selectedPayment: profile.paymentOptions.cards[0]});
-            }
-            this.setState({restaurant, profile, menuItems: items, promoCode});
+            this.setState({restaurant, profile, menuItems: items, promoCode, selectedPayment: payment});
         }
     }
 
@@ -98,7 +95,7 @@ export default class CheckoutScreen extends Component {
                         ) : null
                     }
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.itemWrapper} onPress={this.onSelectPayment}>
+                <View style={styles.itemWrapper}>
                     <View style={Styles.rowCenter}>
                         <Image style={styles.itemImage} source={Images.icon_card} />
                         <Text style={styles.itemTitleText}>Payment Method</Text>
@@ -106,11 +103,11 @@ export default class CheckoutScreen extends Component {
                     {selectedPayment ?
                         (
                             <View style={[Styles.rowCenterBetween, styles.border]}>
-                                <Text style={styles.contentText}>{formatCardNumber(selectedPayment.number)}</Text>
+                                <Text style={styles.contentText}>xxxx xxxx xxxx {selectedPayment.card.last4}</Text>
                             </View>
                         ) : null
                     }
-                </TouchableOpacity>
+                </View>
                 <View style={styles.itemWrapper}>
                     <RoundTextInput
                         label={'COMMENT'}
@@ -121,13 +118,13 @@ export default class CheckoutScreen extends Component {
                         onSubmitEditing={this.onSendOrder}
                     />
                 </View>
-                <PaymentBottomSheet
-                    isVisible={isShowPaymentSheet}
-                    onClose={() => this.setState({ isShowPaymentSheet: false })}
-                    cards={cards}
-                    selectedCard={selectedPayment}
-                    onSelect={this.onChangePayment}
-                />
+                {/*<PaymentBottomSheet*/}
+                {/*    isVisible={isShowPaymentSheet}*/}
+                {/*    onClose={() => this.setState({ isShowPaymentSheet: false })}*/}
+                {/*    cards={cards}*/}
+                {/*    selectedCard={selectedPayment}*/}
+                {/*    onSelect={this.onChangePayment}*/}
+                {/*/>*/}
                 <AddressBottomSheet
                     isVisible={isShowAddressSheet}
                     onClose={() => this.setState({ isShowAddressSheet: false })}
@@ -197,23 +194,60 @@ export default class CheckoutScreen extends Component {
                         onPress: () => {
                             this.setState({isLoading: true});
                             Stripe.setOptions({publishableKey: config.pk_test});
-                            Auth.currentUserInfo().then(info => {
-                                Stripe.createTokenWithCard({
-                                    number: selectedPayment.number,
-                                    cvc: selectedPayment.cvc,
-                                    expMonth: parseInt(selectedPayment.expiry.split('/')[0]),
-                                    expYear: parseInt(selectedPayment.expiry.split('/')[1]),
-                                    name: selectedPayment.name,
-                                }).then(async tokeninfo => {
-                                    const body = {
-                                        amount: total,
-                                        token: tokeninfo.tokenId,
-                                        description:
-                                            info.username + ' has purchased ' + restaurantName,
+                            Auth.currentUserInfo().then(async (info) => {
+                                const body = {
+                                    amount: total,
+                                    token: selectedPayment.tokenId,
+                                    description:
+                                        info.username + ' has purchased ' + restaurantName,
+                                };
+
+                                const response = await fetch(
+                                    'https://veml8u1rjb.execute-api.us-west-1.amazonaws.com/beta/payment',
+                                    {
+                                        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                                        mode: 'cors', // no-cors, *cors, same-origin
+                                        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                                        credentials: 'same-origin', // include, *same-origin, omit
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            Connection: 'keep-alive',
+                                            // ‘Content-Type’: ‘application/x-www-form-urlencoded’,
+                                        },
+                                        redirect: 'follow', // manual, *follow, error
+                                        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                                        body: JSON.stringify(body), // body data type must match “Content-Type” header
+                                    },
+                                );
+
+                                let data = await response.json();
+                                console.log('payment =====>', data);
+
+                                if (data.statusCode === 200) {
+                                    let orderDetail = {
+                                        incomingId: info.username,
+                                        order: {
+                                            customerName:
+                                                profile.customerInfo.customerName.firstName +
+                                                ' ' +
+                                                profile.customerInfo.customerName.lastName,
+                                            restaurantId: restaurant.RestaurantId,
+                                            restaurantName: restaurantName,
+                                            menuId: '',
+                                            menuItems: items,
+                                            promoBought: [promoCode],
+                                            referralCode: '',
+                                            orderTotal: total,
+                                            timeOrderPlaced: new Date(),
+                                            status: 'Awaiting Confirmation',
+                                            timeOrderCompleted: ''
+                                        },
                                     };
 
-                                    const response = await fetch(
-                                        'https://veml8u1rjb.execute-api.us-west-1.amazonaws.com/beta/payment',
+                                    console.log('submit order =====>', orderDetail);
+
+                                    let response = await fetch(
+                                        'https://9yl3ar8isd.execute-api.us-west-1.amazonaws.com/beta/setuporders',
                                         {
                                             method: 'POST', // *GET, POST, PUT, DELETE, etc.
                                             mode: 'cors', // no-cors, *cors, same-origin
@@ -226,62 +260,17 @@ export default class CheckoutScreen extends Component {
                                             },
                                             redirect: 'follow', // manual, *follow, error
                                             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                                            body: JSON.stringify(body), // body data type must match “Content-Type” header
+                                            body: JSON.stringify(orderDetail),
                                         },
                                     );
 
-                                    let data = await response.json();
-                                    console.log('payment =====>', data);
+                                    this.props.navigation.popToTop();
 
-                                    if (data.statusCode === 200) {
-                                        let orderDetail = {
-                                            incomingId: info.username,
-                                            order: {
-                                                customerName:
-                                                    profile.customerInfo.customerName.firstName +
-                                                    ' ' +
-                                                    profile.customerInfo.customerName.lastName,
-                                                restaurantId: restaurant.RestaurantId,
-                                                restaurantName: restaurantName,
-                                                menuId: '',
-                                                menuItems: items,
-                                                promoBought: [promoCode],
-                                                referralCode: '',
-                                                orderTotal: total,
-                                                timeOrderPlaced: new Date(),
-                                                status: 'Awaiting Confirmation',
-                                                timeOrderCompleted: ''
-                                            },
-                                        };
-
-                                        console.log('submit order =====>', orderDetail);
-
-                                        let response = await fetch(
-                                            'https://9yl3ar8isd.execute-api.us-west-1.amazonaws.com/beta/setuporders',
-                                            {
-                                                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                                                mode: 'cors', // no-cors, *cors, same-origin
-                                                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                                                credentials: 'same-origin', // include, *same-origin, omit
-                                                headers: {
-                                                    'Content-Type': 'application/json',
-                                                    Connection: 'keep-alive',
-                                                    // ‘Content-Type’: ‘application/x-www-form-urlencoded’,
-                                                },
-                                                redirect: 'follow', // manual, *follow, error
-                                                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                                                body: JSON.stringify(orderDetail),
-                                            },
-                                        );
-
-                                        this.props.navigation.popToTop();
-
-                                        this.props.navigation.navigate('Orders');
-                                    } else {
-                                        Alert.alert('Payment has failed');
-                                    }
-                                    this.setState({isLoading: false});
-                                });
+                                    this.props.navigation.navigate('Orders');
+                                } else {
+                                    Alert.alert('Payment has failed');
+                                }
+                                this.setState({isLoading: false});
                             });
                         },
                     },

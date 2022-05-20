@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, FlatList, Text, Image, TouchableOpacity, Dimensions} from 'react-native';
+import {View, StyleSheet, Keyboard, Text, Image, TouchableOpacity, Dimensions} from 'react-native';
 import {SafeAreaInsetsContext} from 'react-native-safe-area-context';
 import Toast from 'react-native-easy-toast';
 import FastImage from 'react-native-fast-image';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {Auth} from "aws-amplify";
+import {CreditCardInput} from 'react-native-input-credit-card';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
 import Styles from "../../../theme/Styles";
 import Images from "../../../theme/Images";
@@ -12,6 +14,9 @@ import RoundTextInput from "./RoundTextInput";
 import RoundButton from "./RoundButton";
 import {Button} from "react-native-elements";
 import Modal from "react-native-modal";
+import Stripe from "tipsi-stripe";
+import config from "../../config";
+import Loading from "react-native-loading-spinner-overlay";
 
 const sWidth = Dimensions.get('window').width;
 
@@ -25,6 +30,8 @@ export default class MyOrdersScreen extends Component {
             menuItems: [],
             promoCode: '',
             promoCodeError: '',
+            cardForm: null,
+            cardError: null,
 
             isShowSelectPaymentModal: false
         };
@@ -290,7 +297,7 @@ export default class MyOrdersScreen extends Component {
         if (promoCode == null || promoCode.length == 0) {
             this.setState({promoCodeError: 'Please input a valid code'});
         } else {
-            this.props.navigation.navigate('Checkout', {items: menuItems, promoCode: promoCode, restaurant, profile});
+            this.RBAddPaymentSheet.open();
         }
     }
 
@@ -301,6 +308,87 @@ export default class MyOrdersScreen extends Component {
             subtotal += item.item_price * item.quantity;
         }
         return parseFloat(subtotal.toFixed(2));
+    }
+
+    /////////////////////////////////////////////////////////////////
+    /////////////////////// Add Payment Bottom Sheet ///////////////
+    /////////////////////////////////////////////////////////////////
+    _renderPaymentForm() {
+        const {cardError} = this.state;
+
+        return (
+            <View style={styles.paymentWrapper}>
+                <View style={[styles.oneRowCenter, {width: '100%', height: 50}]}>
+                    <Text style={styles.sheetTitleText}>Payment method</Text>
+                    <TouchableOpacity
+                        style={styles.sheetCloseButton}
+                        onPress={() => this.RBAddPaymentSheet.close()}>
+                        <Image
+                            style={styles.sheetCloseImage}
+                            source={Images.icon_close}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.cardContainer}>
+                    <CreditCardInput
+                        labels={{number: 'CARD NUMBER', expiry: 'EXPIRY', cvc: 'CVV/CVC'}}
+                        onChange={this._onPaymentChange}
+                    />
+                    {cardError && cardError.length > 0 ? (
+                        <Text style={styles.errorText}>{cardError}</Text>
+                    ) : null}
+                </View>
+                <RoundButton
+                    style={styles.sheetButton}
+                    title={'CONFIRM'}
+                    theme={'main'}
+                    enabled={true}
+                    onPress={this.onSave}
+                />
+            </View>
+        );
+    }
+
+    _onPaymentChange = form => {
+        this.setState({cardForm: form, cardError: null});
+    };
+
+    onSave = () => {
+        const {cardForm, isLoading} = this.state;
+        const { menuItems, profile, restaurant, promoCode } = this.state;
+
+        Keyboard.dismiss();
+        if (isLoading) {
+            return;
+        }
+
+        var isValid = true;
+        if (!cardForm || !cardForm.valid) {
+            this.setState({cardError: 'Please input valid card information.'});
+            isValid = false;
+        }
+
+        if (isValid) {
+            this.RBAddPaymentSheet.close();
+            setTimeout(() => {
+                this.setState({isLoading: true}, () => {
+                    Stripe.setOptions({publishableKey: config.pk_test});
+                    Stripe.createTokenWithCard({
+                        number: cardForm.values.number,
+                        cvc: cardForm.values.cvc,
+                        expMonth: parseInt(cardForm.values.expiry.split('/')[0]),
+                        expYear: parseInt(cardForm.values.expiry.split('/')[1]),
+                        name: 'order',
+                    }).then(async tokeninfo => {
+                        this.setState({isLoading: false});
+                        this.props.navigation.navigate('Checkout', {items: menuItems, promoCode: promoCode, restaurant, profile, payment: tokeninfo});
+                    }).catch((err) => {
+                        this.setState({isLoading: false});
+                        this.toast.show(err.message, 2000);
+                    });
+                });
+            }, 300);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -326,7 +414,23 @@ export default class MyOrdersScreen extends Component {
                         </View>
                     )}
                 </SafeAreaInsetsContext.Consumer>
+                <RBSheet
+                    ref={ref => {
+                        this.RBAddPaymentSheet = ref;
+                    }}
+                    height={470}
+                    duration={300}
+                    customStyles={{
+                        container: {
+                            alignItems: 'center',
+                            borderTopLeftRadius: 24,
+                            borderTopRightRadius: 24,
+                        },
+                    }}>
+                    {this._renderPaymentForm()}
+                </RBSheet>
                 <Toast ref={ref => (this.toast = ref)} />
+                <Loading visible={isLoading} />
             </View>
         );
     }
@@ -480,5 +584,52 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         borderColor: '#E2E2E2',
-    }
+    },
+    paymentWrapper: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: 'white',
+        alignItems: 'center',
+        paddingVertical: 20
+    },
+
+    oneRowCenter: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    cardContainer: {
+        width: '100%',
+        height: 320,
+    },
+
+    sheetTitleText: {
+        fontSize: 19,
+        marginBottom: 15,
+        textAlign: 'center',
+        width: '100%'
+    },
+
+    sheetCloseButton: {
+        position: 'absolute',
+        right: 15,
+        top: 2,
+    },
+
+    sheetCloseImage: {
+        width: 22,
+        height: 22,
+    },
+
+    sheetButton: {
+        width: sWidth - 40,
+    },
+
+    errorText: {
+        fontStyle: 'italic',
+        color: '#cf0000',
+        fontSize: 11,
+        marginTop: -30,
+        textAlign: 'center',
+    },
 });
